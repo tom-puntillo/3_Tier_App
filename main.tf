@@ -1,6 +1,6 @@
 #---root-main.tf
 
 module "vpc" {
-    
-    source = "./vpc"
+
+  source = "./vpc"
 }
