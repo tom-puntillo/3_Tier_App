@@ -41,3 +41,26 @@ resource "aws_subnet" "private_subnet_2" {
         Name = "database_subnet"
     }
 }
+
+resource "aws_internet_gateway" "three_tier_igw" {
+    vpc_id = aws_vpc.three_tier_vpc.id
+    
+    tags = {
+        Name = "3_tier_igw"
+    }
+}
+
+resource "aws_eip" "three_tier_eip" {
+    domain = "vpc" 
+}
+
+resource "aws_nat_gateway" "three_tier_nat_gw" {
+    allocation_id = aws_eip.three_tier_eip.id
+    subnet_id = aws_subnet.public_subnet.id
+    
+    tags = {
+        Name = "3_tier_nat_gw"
+    }
+    
+    depends_on = [aws_internet_gateway.three_tier_igw]
+}
