@@ -64,3 +64,16 @@ resource "aws_nat_gateway" "three_tier_nat_gw" {
     
     depends_on = [aws_internet_gateway.three_tier_igw]
 }
+
+resource "aws_route_table" "public_rt" {
+    vpc_id = aws_vpc.three_tier_vpc.id
+    
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.three_tier_igw.id
+    }
+    
+    tags = {
+        Name = "public_rt"
+    }
+}
