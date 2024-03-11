@@ -8,40 +8,72 @@ resource "aws_vpc" "three_tier_vpc" {
     }
 }
 
-resource "aws_subnet" "public_subnet" {
+resource "aws_subnet" "public_subnet_1" {
  vpc_id = aws_vpc.three_tier_vpc.id
- cidr_block = var.public_subnet
+ cidr_block = var.public_subnet_1
  availability_zone = "us-east-1a"
  map_public_ip_on_launch = true
  
  tags = {
-     Name = "web_subnet"
+     Name = "web_subnet_1"
+ }
  }
  
-}
+ resource "aws_subnet" "public_subnet_2" {
+ vpc_id = aws_vpc.three_tier_vpc.id
+ cidr_block = var.public_subnet_2
+ availability_zone = "us-east-1b"
+ map_public_ip_on_launch = true
+ 
+ tags = {
+     Name = "web_subnet_2"
+ }
+ }
 
 resource "aws_subnet" "private_subnet_1" {
     vpc_id = aws_vpc.three_tier_vpc.id
     cidr_block = var.private_subnet_1
-    availability_zone = "us-east-1b"
-    map_public_ip_on_launch = true
+    availability_zone = "us-east-1a"
+    map_public_ip_on_launch = false
     
     tags = {
-        Name = "logic_subnet"
+        Name = "logic_subnet_1"
     }
 }
 
 resource "aws_subnet" "private_subnet_2" {
     vpc_id = aws_vpc.three_tier_vpc.id
     cidr_block = var.private_subnet_2
-    availability_zone = "us-east-1c"
-    map_public_ip_on_launch = true
+    availability_zone = "us-east-1b"
+    map_public_ip_on_launch = false
     
     tags = {
-        Name = "database_subnet"
+        Name = "logic_subnet_2"
     }
 }
 
+resource "aws_subnet" "private_subnet_3" {
+    vpc_id = aws_vpc.three_tier_vpc.id
+    cidr_block = var.private_subnet_3
+    availability_zone = "us-east-1a"
+    map_public_ip_on_launch = false
+    
+    tags = {
+        Name = "database_subnet_1"
+    }
+}
+
+
+resource "aws_subnet" "private_subnet_4" {
+    vpc_id = aws_vpc.three_tier_vpc.id
+    cidr_block = var.private_subnet_4
+    availability_zone = "us-east-1b"
+    map_public_ip_on_launch = false
+    
+    tags = {
+        Name = "database_subnet_2"
+    }
+}
 resource "aws_internet_gateway" "three_tier_igw" {
     vpc_id = aws_vpc.three_tier_vpc.id
     
@@ -56,7 +88,7 @@ resource "aws_eip" "three_tier_eip" {
 
 resource "aws_nat_gateway" "three_tier_nat_gw" {
     allocation_id = aws_eip.three_tier_eip.id
-    subnet_id = aws_subnet.public_subnet.id
+    subnet_id = aws_subnet.public_subnet_1.id
     
     tags = {
         Name = "3_tier_nat_gw"
