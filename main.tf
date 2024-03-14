@@ -12,3 +12,10 @@ module "security_groups" {
   # Pass the VPC ID from the 'vpc' module to the 'security_groups' module
   vpc_id = module.vpc.vpc_id
 }
+
+# Create EC2 instance module
+module "ec2" {
+  source = "./ec2"
+
+  security_groups = [module.security_groups.security_group_http] # Specify the security group for allowing HTTP traffic
+}
