@@ -17,5 +17,6 @@ module "security_groups" {
 module "ec2" {
   source = "./ec2"
 
-  security_groups = [module.security_groups.security_group_http] # Specify the security group for allowing HTTP traffic
+  security_groups = [module.security_groups.security_group_http.id] # Specify the security group for allowing HTTP traffic
+  public_subnet_1 = module.vpc.public_subnet_1.id
 }
