@@ -1,4 +1,4 @@
-#---ec2-main.
+#---ec2-main.tf
 
 resource "tls_private_key" "web_key_pair_gen" {
   algorithm = "RSA"
@@ -24,10 +24,22 @@ resource "aws_launch_template" "web_ec2_lt" {
 
   network_interfaces {
     associate_public_ip_address = true
-    subnet_id                   = var.public_subnet_1
     security_groups             = var.security_groups
 
   }
 
   key_name = aws_key_pair.web_key_pair.id
+}
+
+resource "aws_autoscaling_group" "web_asg" {
+  max_size            = 5
+  min_size            = 2
+  desired_capacity    = 4
+  vpc_zone_identifier = [var.public_subnet_1, var.public_subnet_2]
+
+  launch_template {
+    id      = aws_launch_template.web_ec2_lt.id
+    version = "$Latest"
+  }
+
 }

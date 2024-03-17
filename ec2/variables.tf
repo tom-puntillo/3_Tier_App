@@ -26,5 +26,30 @@ variable "security_groups" {
 
 variable "public_subnet_1" {
   type        = string
-  description = "public subnet ids"
+  description = "public_subnet_1"
+}
+
+variable "public_subnet_2" {
+  type        = string
+  description = "public_subnet_2"
+}
+
+variable "private_subnet_1" {
+  type        = string
+  description = "private_subnet_1"
+}
+
+variable "private_subnet_2" {
+  type        = string
+  description = "private_subnet_2"
+}
+
+variable "private_subnet_3" {
+  type        = string
+  description = "private_subnet_3"
+}
+
+variable "private_subnet_4" {
+  type        = string
+  description = "private_subnet_4"
 }
