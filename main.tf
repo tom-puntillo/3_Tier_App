@@ -17,11 +17,11 @@ module "security_groups" {
 module "ec2" {
   source = "./ec2"
 
-  security_groups  = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id] # Specify the security group for allowing HTTP traffic
-  public_subnet_1  = module.vpc.public_subnet_1_cidr
-  public_subnet_2  = module.vpc.public_subnet_2_cidr
-  private_subnet_1 = module.vpc.private_subnet_1_cidr
-  private_subnet_2 = module.vpc.private_subnet_2_cidr
-  private_subnet_3 = module.vpc.private_subnet_3_cidr
-  private_subnet_4 = module.vpc.private_subnet_4_cidr
+  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id] # Specify the security group for allowing HTTP traffic
+  public_subnet_1_id  = module.vpc.public_subnet_1_id
+  public_subnet_2_id  = module.vpc.public_subnet_2_id
+  private_subnet_1_id = module.vpc.private_subnet_1_id
+  private_subnet_2_id = module.vpc.private_subnet_2_id
+  private_subnet_3_id = module.vpc.private_subnet_3_id
+  private_subnet_4_id = module.vpc.private_subnet_4_id
 }

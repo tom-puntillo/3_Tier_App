@@ -24,32 +24,32 @@ variable "security_groups" {
   description = "list of security groups" # Provide a description for the variable.
 }
 
-variable "public_subnet_1" {
+variable "public_subnet_1_id" {
   type        = string
   description = "public_subnet_1"
 }
 
-variable "public_subnet_2" {
+variable "public_subnet_2_id" {
   type        = string
   description = "public_subnet_2"
 }
 
-variable "private_subnet_1" {
+variable "private_subnet_1_id" {
   type        = string
   description = "private_subnet_1"
 }
 
-variable "private_subnet_2" {
+variable "private_subnet_2_id" {
   type        = string
   description = "private_subnet_2"
 }
 
-variable "private_subnet_3" {
+variable "private_subnet_3_id" {
   type        = string
   description = "private_subnet_3"
 }
 
-variable "private_subnet_4" {
+variable "private_subnet_4_id" {
   type        = string
   description = "private_subnet_4"
 }
