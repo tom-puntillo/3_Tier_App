@@ -25,3 +25,17 @@ module "ec2" {
   private_subnet_3_id = module.vpc.private_subnet_3_id
   private_subnet_4_id = module.vpc.private_subnet_4_id
 }
+
+module "alb" {
+  source = "./alb"
+
+  vpc_id              = module.vpc.vpc_id
+  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id] # Specify the security group for allowing HTTP traffic
+  public_subnet_1_id  = module.vpc.public_subnet_1_id
+  public_subnet_2_id  = module.vpc.public_subnet_2_id
+  private_subnet_1_id = module.vpc.private_subnet_1_id
+  private_subnet_2_id = module.vpc.private_subnet_2_id
+  private_subnet_3_id = module.vpc.private_subnet_3_id
+  private_subnet_4_id = module.vpc.private_subnet_4_id
+  web_subnet_ids      = [var.public_subnet_1_id, var.public_subnet_2_id]
+}
