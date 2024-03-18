@@ -35,7 +35,7 @@ resource "aws_autoscaling_group" "web_asg" {
   max_size            = 5
   min_size            = 2
   desired_capacity    = 4
-  vpc_zone_identifier = [var.public_subnet_1, var.public_subnet_2]
+  vpc_zone_identifier = [var.public_subnet_1_id, var.public_subnet_2_id]
 
   launch_template {
     id      = aws_launch_template.web_ec2_lt.id
