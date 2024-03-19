@@ -32,7 +32,6 @@ resource "aws_lb_target_group" "http_tg" {
 }
 
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment" {
-  count            = length(var.instance_ids)
   target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = var.instance_ids[count.index]
+  target_id        = var.ec2_instance_ids
 }
