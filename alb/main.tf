@@ -34,4 +34,6 @@ resource "aws_lb_target_group" "http_tg" {
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment" {
   target_group_arn = aws_lb_target_group.http_tg.arn
   target_id        = var.ec2_instance_ids
+
+  depends_on = [aws_lb.web_tier_alb]
 }
