@@ -5,7 +5,7 @@ resource "aws_lb" "web_tier_alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = var.security_groups
-  subnets            = var.web_subnet_ids
+  subnets            = [var.public_subnet_1_id, var.public_subnet_2_id]
 }
 
 resource "aws_lb_listener" "http_listener" {
@@ -14,10 +14,12 @@ resource "aws_lb_listener" "http_listener" {
   protocol          = "HTTP"
 
   default_action {
-    type         = "fixed-response"
-    status_code  = 200
-    content_type = "text/plain"
-    message_body = "Welcome to Thomas Puntillo's NGINX landing page"
+    type = "fixed-response"
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Welcome to my NGINX page!"
+      status_code  = "200"
+    }
   }
 }
 
@@ -29,13 +31,13 @@ resource "aws_lb_target_group" "http_tg" {
   target_type = "instance"
 }
 
-data "aws_autoscaling_groups" "web_autoscaling" {
-  names = ["web_asg"]
+data "aws_autoscaling_group" "web_autoscaling" {
+  name = var.web_asg_name
 }
 
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment" {
-  target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = data.aws_autoscaling_groups.web_autoscaling.instances[count.index].id
+  count = length(data.aws_autoscaling_group.web_autoscaling.*.name)
 
-  count = length(data.aws_autoscaling_groups.web_autoscaling.instances)
+  target_group_arn = aws_lb_target_group.http_tg.arn
+  target_id        = data.aws_autoscaling_group.web_autoscaling.id
 }

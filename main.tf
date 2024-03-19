@@ -37,5 +37,6 @@ module "alb" {
   private_subnet_2_id = module.vpc.private_subnet_2_id
   private_subnet_3_id = module.vpc.private_subnet_3_id
   private_subnet_4_id = module.vpc.private_subnet_4_id
-  web_subnet_ids      = [var.public_subnet_1_id, var.public_subnet_2_id]
+  web_asg_name        = module.ec2.web_asg_name
+  web_asg_id          = module.ec2.web_asg_id
 }
