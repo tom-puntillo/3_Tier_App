@@ -2,13 +2,13 @@
 
 variable "alb_name" {
   type        = string
-  default     = "web_tier_alb"
+  default     = "web-tier-alb"
   description = "Name of the web tier application load balancer"
 }
 
 variable "target_group_name" {
   type        = string
-  default     = "web_alb_tg"
+  default     = "web-alb-tg"
   description = "Name of the web tier instances target group"
 }
 
@@ -59,8 +59,12 @@ variable "private_subnet_4_id" {
   description = "private_subnet_4"
 }
 
-variable "web_subnet_ids" {
-  type        = list(string)
-  default     = null
-  description = "List of subnets for the web tier alb"
+variable "web_asg_name" {
+  type        = string
+  description = "Name of web asg"
+}
+
+variable "web_asg_id" {
+  type        = string
+  description = "Web asg id"
 }
