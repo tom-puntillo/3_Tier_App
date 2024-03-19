@@ -68,3 +68,9 @@ variable "web_asg_id" {
   type        = string
   description = "Web asg id"
 }
+
+variable "instance_ids" {
+  type        = list(string)
+  description = "List of EC2 ids"
+  default     = []
+}

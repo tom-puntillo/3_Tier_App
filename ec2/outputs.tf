@@ -7,3 +7,7 @@ output "web_asg_name" {
 output "web_asg_id" {
     value = aws_autoscaling_group.web_asg.id
 }
+
+output "instance_ids" {
+    value = [aws_autoscaling_group.web_asg.*.id]
+}

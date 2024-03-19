@@ -31,11 +31,8 @@ resource "aws_lb_target_group" "http_tg" {
   target_type = "instance"
 }
 
-data "aws_autoscaling_group" "web_autoscaling" {
-  name = var.web_asg_name
-}
-
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment" {
+  count            = length(var.instance_ids)
   target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = data.aws_autoscaling_group.web_autoscaling.id
+  target_id        = var.instance_ids[count.index]
 }
