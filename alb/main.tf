@@ -36,8 +36,6 @@ data "aws_autoscaling_group" "web_autoscaling" {
 }
 
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment" {
-  count = length(data.aws_autoscaling_group.web_autoscaling.name)
-
   target_group_arn = aws_lb_target_group.http_tg.arn
   target_id        = data.aws_autoscaling_group.web_autoscaling.id
 }
