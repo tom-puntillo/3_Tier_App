@@ -46,11 +46,3 @@ resource "aws_autoscaling_group" "web_asg" {
     version = "$Latest"
   }
 }
-
-# Retrieve information about EC2 instances in the autoscaling group
-data "aws_instances" "web_asg_ec2_instances" {
-  filter {
-    name   = "instance.group-id"
-    values = var.security_groups
-  }
-}

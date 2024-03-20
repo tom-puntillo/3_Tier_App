@@ -42,5 +42,5 @@ module "alb" {
   private_subnet_4_id = module.vpc.private_subnet_4_id
   web_asg_name        = module.ec2.web_asg_name
   web_asg_id          = module.ec2.web_asg_id
-  ec2_instance_ids    = module.ec2.ec2_instance_ids
+  web_asg_arn         = module.ec2.web_asg_arn
 }
