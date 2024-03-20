@@ -30,19 +30,21 @@ resource "aws_security_group" "allow_http" {
   }
 }
 
+# Define an AWS security group resource named "allow_tls"
 resource "aws_security_group" "allow_tls" {
   name        = "HTTPS from Anywhere"
   description = "Allows HTTPS inbound traffic"
   vpc_id      = var.vpc_id
 
+  # Define inbound traffic rules for HTTPS
   ingress {
     to_port     = 443
     from_port   = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
-
   }
 
+  # Define outbound traffic rules
   egress {
     to_port          = 0
     from_port        = 0
@@ -51,6 +53,7 @@ resource "aws_security_group" "allow_tls" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
+  # Set tags for the security group
   tags = {
     Name = "allow tls"
   }

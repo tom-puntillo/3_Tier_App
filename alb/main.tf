@@ -1,5 +1,6 @@
 #---alb-main.tf
 
+# Define Application Load Balancer (ALB) resource
 resource "aws_lb" "web_tier_alb" {
   name               = var.alb_name
   internal           = false
@@ -8,6 +9,7 @@ resource "aws_lb" "web_tier_alb" {
   subnets            = [var.public_subnet_1_id, var.public_subnet_2_id]
 }
 
+# Define HTTP listener for ALB
 resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.web_tier_alb.arn
   port              = 80
@@ -23,6 +25,7 @@ resource "aws_lb_listener" "http_listener" {
   }
 }
 
+# Define target group for ALB to route traffic to EC2 instances
 resource "aws_lb_target_group" "http_tg" {
   name        = var.target_group_name
   port        = 80
@@ -31,6 +34,7 @@ resource "aws_lb_target_group" "http_tg" {
   target_type = "instance"
 }
 
+# Attach EC2 instances to target group
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_0" {
   target_group_arn = aws_lb_target_group.http_tg.arn
   target_id        = var.ec2_instance_ids_0
@@ -45,14 +49,12 @@ resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_1" {
   depends_on = [aws_lb.web_tier_alb]
 }
 
-
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_2" {
   target_group_arn = aws_lb_target_group.http_tg.arn
   target_id        = var.ec2_instance_ids_2
 
   depends_on = [aws_lb.web_tier_alb]
 }
-
 
 resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_3" {
   target_group_arn = aws_lb_target_group.http_tg.arn
