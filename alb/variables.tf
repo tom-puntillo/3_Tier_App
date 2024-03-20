@@ -69,7 +69,22 @@ variable "web_asg_id" {
   description = "Web asg id"
 }
 
-variable "ec2_instance_ids" {
+variable "ec2_instance_ids_0" {
   type        = string
-  description = "List of EC2 ids"
+  description = "First EC2 id"
+}
+
+variable "ec2_instance_ids_1" {
+  type        = string
+  description = "Second EC2 id"
+}
+
+variable "ec2_instance_ids_2" {
+  type        = string
+  description = "Third EC2 id"
+}
+
+variable "ec2_instance_ids_3" {
+  type        = string
+  description = "Fourth EC2 id"
 }
