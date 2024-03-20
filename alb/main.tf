@@ -34,10 +34,7 @@ resource "aws_lb_target_group" "http_tg" {
   target_type = "instance"
 }
 
-# Attach EC2 instances to target group
-resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_0" {
-  target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = var.ec2_instance_ids[0]
-
-  depends_on = [aws_lb.web_tier_alb]
+resource "aws_autoscaling_attachment" "web_asg_tg_attachment" {
+  autoscaling_group_name = var.web_asg_id
+  lb_target_group_arn    = aws_lb_target_group.http_tg.arn
 }

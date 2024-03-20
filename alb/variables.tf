@@ -71,7 +71,7 @@ variable "web_asg_id" {
   description = "ID of the web autoscaling group"
 }
 
-variable "ec2_instance_ids" {
-  type        = list(string)
-  description = "ID of the first EC2 instance"
+variable "web_asg_arn" {
+  type        = string
+  description = "ARN of the web autoscaling group"
 }
