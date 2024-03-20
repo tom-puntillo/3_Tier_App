@@ -18,7 +18,7 @@ module "ec2" {
   source = "./ec2"
 
   # Specify the security groups for allowing HTTP and HTTPS traffic
-  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id]
+  security_groups     = [module.security_groups.security_group_http, module.security_groups.security_group_tls]
   public_subnet_1_id  = module.vpc.public_subnet_1_id
   public_subnet_2_id  = module.vpc.public_subnet_2_id
   private_subnet_1_id = module.vpc.private_subnet_1_id
@@ -33,7 +33,7 @@ module "alb" {
 
   # Pass necessary parameters to the ALB module
   vpc_id              = module.vpc.vpc_id
-  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id]
+  security_groups     = [module.security_groups.security_group_http, module.security_groups.security_group_tls]
   public_subnet_1_id  = module.vpc.public_subnet_1_id
   public_subnet_2_id  = module.vpc.public_subnet_2_id
   private_subnet_1_id = module.vpc.private_subnet_1_id
@@ -43,7 +43,4 @@ module "alb" {
   web_asg_name        = module.ec2.web_asg_name
   web_asg_id          = module.ec2.web_asg_id
   ec2_instance_ids_0  = module.ec2.ec2_instance_ids_0
-  ec2_instance_ids_1  = module.ec2.ec2_instance_ids_1
-  ec2_instance_ids_2  = module.ec2.ec2_instance_ids_2
-  ec2_instance_ids_3  = module.ec2.ec2_instance_ids_3
 }

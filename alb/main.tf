@@ -41,25 +41,3 @@ resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_0" {
 
   depends_on = [aws_lb.web_tier_alb]
 }
-
-resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_1" {
-  target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = var.ec2_instance_ids_1
-
-  depends_on = [aws_lb.web_tier_alb]
-}
-
-resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_2" {
-  target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = var.ec2_instance_ids_2
-
-  depends_on = [aws_lb.web_tier_alb]
-}
-
-resource "aws_lb_target_group_attachment" "web_lb_tg_attachment_3" {
-  target_group_arn = aws_lb_target_group.http_tg.arn
-  target_id        = var.ec2_instance_ids_3
-
-  depends_on = [aws_lb.web_tier_alb]
-}
-
