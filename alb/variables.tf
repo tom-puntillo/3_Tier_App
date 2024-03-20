@@ -75,18 +75,3 @@ variable "ec2_instance_ids_0" {
   type        = string
   description = "ID of the first EC2 instance"
 }
-
-variable "ec2_instance_ids_1" {
-  type        = string
-  description = "ID of the second EC2 instance"
-}
-
-variable "ec2_instance_ids_2" {
-  type        = string
-  description = "ID of the third EC2 instance"
-}
-
-variable "ec2_instance_ids_3" {
-  type        = string
-  description = "ID of the fourth EC2 instance"
-}
