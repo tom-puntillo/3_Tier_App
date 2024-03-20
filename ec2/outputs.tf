@@ -11,6 +11,6 @@ output "web_asg_id" {
 }
 
 # Output the IDs of the EC2 instances in the autoscaling group
-output "ec2_instance_ids_0" {
-  value = data.aws_instances.web_asg_ec2_instances.ids[0]
+output "ec2_instance_ids" {
+  value = data.aws_instances.web_asg_ec2_instances.ids
 }
