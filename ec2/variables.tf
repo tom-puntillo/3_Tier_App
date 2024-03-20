@@ -21,35 +21,36 @@ variable "user_data" {
 # Define a variable named "security_groups" which expects a list of strings.
 variable "security_groups" {
   type        = list(string)              # Specify that the variable should be a list of strings.
-  description = "list of security groups" # Provide a description for the variable.
+  description = "List of security groups" # Provide a description for the variable.
 }
 
+# Define variables for subnet IDs
 variable "public_subnet_1_id" {
   type        = string
-  description = "public_subnet_1"
+  description = "ID of the first public subnet"
 }
 
 variable "public_subnet_2_id" {
   type        = string
-  description = "public_subnet_2"
+  description = "ID of the second public subnet"
 }
 
 variable "private_subnet_1_id" {
   type        = string
-  description = "private_subnet_1"
+  description = "ID of the first private subnet"
 }
 
 variable "private_subnet_2_id" {
   type        = string
-  description = "private_subnet_2"
+  description = "ID of the second private subnet"
 }
 
 variable "private_subnet_3_id" {
   type        = string
-  description = "private_subnet_3"
+  description = "ID of the third private subnet"
 }
 
 variable "private_subnet_4_id" {
   type        = string
-  description = "private_subnet_4"
+  description = "ID of the fourth private subnet"
 }

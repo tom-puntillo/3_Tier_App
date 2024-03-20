@@ -17,7 +17,8 @@ module "security_groups" {
 module "ec2" {
   source = "./ec2"
 
-  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id] # Specify the security group for allowing HTTP traffic
+  # Specify the security groups for allowing HTTP and HTTPS traffic
+  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id]
   public_subnet_1_id  = module.vpc.public_subnet_1_id
   public_subnet_2_id  = module.vpc.public_subnet_2_id
   private_subnet_1_id = module.vpc.private_subnet_1_id
@@ -26,11 +27,13 @@ module "ec2" {
   private_subnet_4_id = module.vpc.private_subnet_4_id
 }
 
+# Create Application Load Balancer (ALB) module
 module "alb" {
   source = "./alb"
 
+  # Pass necessary parameters to the ALB module
   vpc_id              = module.vpc.vpc_id
-  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id] # Specify the security group for allowing HTTP traffic
+  security_groups     = [module.security_groups.security_group_http.id, module.security_groups.security_group_tls.id]
   public_subnet_1_id  = module.vpc.public_subnet_1_id
   public_subnet_2_id  = module.vpc.public_subnet_2_id
   private_subnet_1_id = module.vpc.private_subnet_1_id
