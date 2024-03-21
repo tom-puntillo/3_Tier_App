@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "allow_ssh_web" {
   type              = "ingress"
   to_port           = 22
   from_port         = 22
-  protocol          = "ssh"
+  protocol          = "tcp"
   cidr_blocks       = ["73.0.169.120/32"]
   security_group_id = aws_security_group.allow_http_and_tls_web.id
 }
