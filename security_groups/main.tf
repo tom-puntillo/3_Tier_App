@@ -39,6 +39,15 @@ resource "aws_security_group_rule" "allow_tls_web" {
   security_group_id = aws_security_group.allow_http_and_tls_web.id
 }
 
+resource "aws_security_group_rule" "allow_ssh_web" {
+  type              = "ingress"
+  to_port           = 22
+  from_port         = 22
+  protocol          = "ssh"
+  cidr_blocks       = ["73.0.169.120/32"]
+  security_group_id = aws_security_group.allow_http_and_tls_web.id
+}
+
 # Define an AWS security group resource named "allow_tls"
 resource "aws_security_group" "allow_http_and_tls_logic" {
   name        = "logic_security_group"
