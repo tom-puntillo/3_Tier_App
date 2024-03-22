@@ -1,12 +1,12 @@
 #---security_groups-main.tf
 
-# Define an AWS security group resource named "allow_http"
+# Define an AWS security group resource named "allow_http_and_tls_web"
 resource "aws_security_group" "allow_http_and_tls_web" {
-  name        = "web_security_group"          # Set the name of the security group to "allow_http"
+  name        = "web_security_group"          # Set the name of the security group to "web_security_group"
   description = "Allows HTTP inbound traffic" # Provide a description for the security group
   vpc_id      = var.vpc_id                    # Set the VPC ID for the security group based on the input variable 'vpc_id'
 
-  # Define inbound traffic rules
+  # Define inbound traffic rules for HTTP
   ingress {
     description = "HTTP from Anywhere" # Set the description for the ingress rule
     to_port     = 80                   # Allow traffic to port 80
@@ -26,40 +26,42 @@ resource "aws_security_group" "allow_http_and_tls_web" {
 
   # Set tags for the security group
   tags = {
-    Name = "allow_traffic_from_internet" # Set the tag 'Name' to "allow_http"
+    Name = "allow_traffic_from_internet" # Set the tag 'Name' to "allow_traffic_from_internet"
   }
 }
 
+# Define a security group rule to allow HTTPS traffic
 resource "aws_security_group_rule" "allow_tls_web" {
   type              = "ingress"
   to_port           = 443
   from_port         = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_http_and_tls_web.id
+  security_group_id = aws_security_group.allow_http_and_tls_web.id # Allow from the defined security group
 }
 
+# Define a security group rule to allow SSH traffic
 resource "aws_security_group_rule" "allow_ssh_web" {
   type              = "ingress"
   to_port           = 22
   from_port         = 22
   protocol          = "tcp"
-  cidr_blocks       = ["73.0.169.120/32"]
-  security_group_id = aws_security_group.allow_http_and_tls_web.id
+  cidr_blocks       = ["73.0.169.120/32"]                          # Allow traffic only from a specific IP
+  security_group_id = aws_security_group.allow_http_and_tls_web.id # Allow from the defined security group
 }
 
-# Define an AWS security group resource named "allow_tls"
+# Define an AWS security group resource named "allow_http_and_tls_logic"
 resource "aws_security_group" "allow_http_and_tls_logic" {
   name        = "logic_security_group"
   description = "Allows HTTP and HTTPS inbound traffic"
   vpc_id      = var.vpc_id
 
-  # Define inbound traffic rules for HTTPS
+  # Define inbound traffic rule for HTTP from the web tier security group
   ingress {
     to_port         = 80
     from_port       = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.allow_http_and_tls_web.id]
+    security_groups = [aws_security_group.allow_http_and_tls_web.id] # Allow from the defined security group
   }
 
   # Define outbound traffic rules
@@ -77,12 +79,13 @@ resource "aws_security_group" "allow_http_and_tls_logic" {
   }
 }
 
+# Define a security group rule to allow HTTPS traffic from the logic tier
 resource "aws_security_group_rule" "allow_tls_logic" {
   type              = "ingress"
   to_port           = 443
   from_port         = 443
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_http_and_tls_logic.id
+  security_group_id = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
 }
 
