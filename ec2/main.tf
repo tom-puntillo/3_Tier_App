@@ -10,6 +10,8 @@ resource "tls_private_key" "web_key_pair_gen" {
 resource "local_file" "web_public_key" {
   content  = tls_private_key.web_key_pair_gen.public_key_openssh
   filename = "${path.module}/web_key.pub"
+
+  depends_on = [tls_private_key.web_key_pair_gen]
 }
 
 # Create an AWS key pair using the generated RSA key pair
