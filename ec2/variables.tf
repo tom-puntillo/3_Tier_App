@@ -19,9 +19,14 @@ variable "user_data" {
 }
 
 # Define a variable named "security_groups" which expects a list of strings.
-variable "security_groups" {
-  type        = list(string)              # Specify that the variable should be a list of strings.
-  description = "List of security groups" # Provide a description for the variable.
+variable "security_group_web" {
+  type        = string               # Specify that the variable should be a list of strings.
+  description = "Web security group" # Provide a description for the variable.
+}
+
+variable "security_group_logic" {
+  type        = string                 # Specify that the variable should be a list of strings.
+  description = "Logic security group" # Provide a description for the variable.
 }
 
 # Define variables for subnet IDs

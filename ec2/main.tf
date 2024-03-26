@@ -22,15 +22,15 @@ resource "aws_key_pair" "web_key_pair" {
 
 # Define launch template for EC2 instances
 resource "aws_launch_template" "web_ec2_lt" {
-  name_prefix   = "web-"
-  description   = "Web facing EC2 instance launch template"
-  image_id      = var.ami
-  instance_type = var.instance_type
-  user_data     = var.user_data
+  name_prefix          = "web-"
+  description          = "Web facing EC2 instance launch template"
+  image_id             = var.ami
+  instance_type        = var.instance_type
+  user_data            = var.user_data
+  security_group_names = [var.security_group_web]
 
   network_interfaces {
     associate_public_ip_address = true
-    security_groups             = var.security_groups
   }
 
   key_name = aws_key_pair.web_key_pair.id
