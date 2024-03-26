@@ -81,11 +81,21 @@ resource "aws_security_group" "allow_http_and_tls_logic" {
 
 # Define a security group rule to allow HTTPS traffic from the logic tier
 resource "aws_security_group_rule" "allow_tls_logic" {
-  type              = "ingress"
-  to_port           = 443
-  from_port         = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
+  type                     = "ingress"
+  to_port                  = 443
+  from_port                = 443
+  protocol                 = "tcp"
+  source_security_group_id = aws_security_group.allow_http_and_tls_web.id
+  security_group_id        = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
+}
+
+# Define a security group rule to allow ICMP traffic from the logic tier
+resource "aws_security_group_rule" "allow_icmp_logic" {
+  type                     = "ingress"
+  to_port                  = -1
+  from_port                = -1
+  protocol                 = "icmp"
+  source_security_group_id = aws_security_group.allow_http_and_tls_web.id
+  security_group_id        = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
 }
 
