@@ -18,13 +18,14 @@ module "ec2" {
   source = "./ec2"
 
   # Specify the security groups for allowing HTTP and HTTPS traffic
-  security_groups     = [module.security_groups.security_group_web, module.security_groups.security_group_logic]
-  public_subnet_1_id  = module.vpc.public_subnet_1_id
-  public_subnet_2_id  = module.vpc.public_subnet_2_id
-  private_subnet_1_id = module.vpc.private_subnet_1_id
-  private_subnet_2_id = module.vpc.private_subnet_2_id
-  private_subnet_3_id = module.vpc.private_subnet_3_id
-  private_subnet_4_id = module.vpc.private_subnet_4_id
+  security_group_web   = module.security_groups.security_group_web
+  security_group_logic = module.security_groups.security_group_logic
+  public_subnet_1_id   = module.vpc.public_subnet_1_id
+  public_subnet_2_id   = module.vpc.public_subnet_2_id
+  private_subnet_1_id  = module.vpc.private_subnet_1_id
+  private_subnet_2_id  = module.vpc.private_subnet_2_id
+  private_subnet_3_id  = module.vpc.private_subnet_3_id
+  private_subnet_4_id  = module.vpc.private_subnet_4_id
 }
 
 # Create Application Load Balancer (ALB) module
