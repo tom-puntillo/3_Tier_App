@@ -45,4 +45,7 @@ module "alb" {
   web_asg_name         = module.ec2.web_asg_name
   web_asg_id           = module.ec2.web_asg_id
   web_asg_arn          = module.ec2.web_asg_arn
+  logic_asg_name       = module.ec2.logic_asg_name
+  logic_asg_id         = module.ec2.logic_asg_id
+  logic_asg_arn        = module.ec2.logic_asg_arn
 }

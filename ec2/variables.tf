@@ -13,9 +13,14 @@ variable "instance_type" {
 }
 
 # Define a variable named "user_data" with type string and a default value containing encoded shell script for initializing the instance.
-variable "user_data" {
+variable "user_data_web" {
   type    = string
   default = "IyEvYmluL2Jhc2gKCnN1ZG8geXVtIHVwZGF0ZSAteQpzdWRvIHl1bSB1cGdyYWRlIC15CnN1ZG8geXVtIGluc3RhbGwgbmdpbnggLXkKc3VkbyBzeXN0ZW1jdGwgc3RhcnQgbmdpbngKc3VkbyBzeXN0ZW1jdGwgZW5hYmxlIG5naW54Cg=="
+}
+
+variable "user_data_logic" {
+  type    = string
+  default = "IyEvYmluL2Jhc2gKCnN1ZG8geXVtIHVwZGF0ZSAteQpzdWRvIHl1bSB1cGdyYWRlIC15CnN1ZG8geXVtIGluc3RhbGwgLXkgZ2NjLWMrKyBtYWtlIApjdXJsIC1zTCBodHRwczovL3JwbS5ub2Rlc291cmNlLmNvbS9zZXR1cF8yMC54IHwgc3VkbyAtRSBiYXNoIC0Kc3VkbyB5dW0gaW5zdGFsbCAteSBub2RlanMK"
 }
 
 # Define a variable named "security_groups" which expects a list of strings.
