@@ -5,7 +5,7 @@ resource "aws_lb" "web_tier_alb" {
   name               = var.alb_name                                     # Set the name of the ALB from the input variable
   internal           = false                                            # Specifies whether the ALB is internal or not
   load_balancer_type = "application"                                    # Specify the type of load balancer as application
-  security_groups    = var.security_groups                              # List of security groups associated with the ALB
+  security_groups    = [var.security_group_web]                         # List of security groups associated with the ALB
   subnets            = [var.public_subnet_1_id, var.public_subnet_2_id] # List of subnets for the ALB
 }
 

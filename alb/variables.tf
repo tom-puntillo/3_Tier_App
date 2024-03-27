@@ -26,9 +26,14 @@ variable "vpc_id" {
   type = string
 }
 
-variable "security_groups" {
-  type        = list(string)
-  description = "List of security groups"
+variable "security_group_web" {
+  type        = string               # Specify that the variable should be a list of strings.
+  description = "Web security group" # Provide a description for the variable.
+}
+
+variable "security_group_logic" {
+  type        = string                 # Specify that the variable should be a list of strings.
+  description = "Logic security group" # Provide a description for the variable.
 }
 
 variable "public_subnet_1_id" {
