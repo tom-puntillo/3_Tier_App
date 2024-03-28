@@ -105,7 +105,7 @@ resource "aws_security_group_rule" "allow_ssh_logic" {
   to_port           = 22
   from_port         = 22
   protocol          = "tcp"
-  cidr_blocks       = ["73.0.169.120/32"]                            # Allow traffic only from a specific IP
+  source_security_group_id = aws_security_group.allow_http_and_tls_web.id
   security_group_id = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
 }
 
