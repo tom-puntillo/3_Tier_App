@@ -24,8 +24,6 @@ module "ec2" {
   public_subnet_2_id   = module.vpc.public_subnet_2_id
   private_subnet_1_id  = module.vpc.private_subnet_1_id
   private_subnet_2_id  = module.vpc.private_subnet_2_id
-  private_subnet_3_id  = module.vpc.private_subnet_3_id
-  private_subnet_4_id  = module.vpc.private_subnet_4_id
 }
 
 # Create Application Load Balancer (ALB) module
@@ -40,8 +38,6 @@ module "alb" {
   public_subnet_2_id   = module.vpc.public_subnet_2_id
   private_subnet_1_id  = module.vpc.private_subnet_1_id
   private_subnet_2_id  = module.vpc.private_subnet_2_id
-  private_subnet_3_id  = module.vpc.private_subnet_3_id
-  private_subnet_4_id  = module.vpc.private_subnet_4_id
   web_asg_name         = module.ec2.web_asg_name
   web_asg_id           = module.ec2.web_asg_id
   web_asg_arn          = module.ec2.web_asg_arn

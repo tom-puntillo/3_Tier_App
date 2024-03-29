@@ -54,13 +54,3 @@ variable "private_subnet_2_id" {
   type        = string
   description = "ID of the second private subnet"
 }
-
-variable "private_subnet_3_id" {
-  type        = string
-  description = "ID of the third private subnet"
-}
-
-variable "private_subnet_4_id" {
-  type        = string
-  description = "ID of the fourth private subnet"
-}

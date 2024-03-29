@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "allow_ssh_web" {
   to_port           = 22
   from_port         = 22
   protocol          = "tcp"
-  cidr_blocks       = ["73.0.169.120/32"]                          # Allow traffic only from a specific IP
+  cidr_blocks       = [var.allowed_ip]                             # Allow traffic only from a specific IP
   security_group_id = aws_security_group.allow_http_and_tls_web.id # Allow from the defined security group
 }
 
@@ -101,11 +101,11 @@ resource "aws_security_group_rule" "allow_icmp_logic" {
 
 # Define a security group rule to allow SSH traffic
 resource "aws_security_group_rule" "allow_ssh_logic" {
-  type              = "ingress"
-  to_port           = 22
-  from_port         = 22
-  protocol          = "tcp"
+  type                     = "ingress"
+  to_port                  = 22
+  from_port                = 22
+  protocol                 = "tcp"
   source_security_group_id = aws_security_group.allow_http_and_tls_web.id
-  security_group_id = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
+  security_group_id        = aws_security_group.allow_http_and_tls_logic.id # Allow from the defined security group
 }
 
