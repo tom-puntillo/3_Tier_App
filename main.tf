@@ -45,3 +45,10 @@ module "alb" {
   logic_asg_id         = module.ec2.logic_asg_id
   logic_asg_arn        = module.ec2.logic_asg_arn
 }
+
+module "rds_db" {
+  source = "./rds_db"
+
+  private_subnet_3_id = module.vpc.private_subnet_3_id
+  private_subnet_4_id = module.vpc.private_subnet_4_id
+}
