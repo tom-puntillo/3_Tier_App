@@ -14,7 +14,7 @@ resource "aws_rds_cluster" "aurora_cluster" {
   master_password         = var.master_password
   backup_retention_period = 30
   preferred_backup_window = "06:00-08:00"
-  skip_final_snapshot     = false
+  skip_final_snapshot     = true
   db_subnet_group_name    = aws_db_subnet_group.aurora_subnet_group.name
 }
 
