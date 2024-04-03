@@ -46,9 +46,11 @@ module "alb" {
   logic_asg_arn        = module.ec2.logic_asg_arn
 }
 
+# Create RDS Database module
 module "rds_db" {
   source = "./rds_db"
 
+  # Pass necessary parameters to the RDS Database module
   private_subnet_3_id = module.vpc.private_subnet_3_id
   private_subnet_4_id = module.vpc.private_subnet_4_id
 }

@@ -41,17 +41,18 @@ variable "logic_tg_attachment" {
 # Define input variables for ALB and EC2 configuration
 
 variable "vpc_id" {
-  type = string
+  type        = string
+  description = "ID of the VPC"
 }
 
 variable "security_group_web" {
-  type        = string               # Specify that the variable should be a list of strings.
-  description = "Web security group" # Provide a description for the variable.
+  type        = string # Correct the type to list(string)
+  description = "Web security group"
 }
 
 variable "security_group_logic" {
-  type        = string                 # Specify that the variable should be a list of strings.
-  description = "Logic security group" # Provide a description for the variable.
+  type        = string # Correct the type to list(string)
+  description = "Logic security group"
 }
 
 variable "public_subnet_1_id" {
